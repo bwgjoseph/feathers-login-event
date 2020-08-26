@@ -20,7 +20,9 @@ export default function(app: Application): void {
   app.use('/authentication', authentication);
   app.configure(expressOauth());
 
-  app.on('login', (_authResult: any) => {
+  app.on('login', async (_authResult: any) => {
     console.log('hello world');
+
+    await app.service('token').checkToken(_authResult);
   });
 }

@@ -31,12 +31,15 @@ describe('authentication', () => {
     });
 
     it.only('should trigger app.login event', async () => {
+      app.setup();
+
       const { user, accessToken } = await app.service('authentication').create({
         strategy: 'local',
         ...userInfo
       }, { provider: 'rest' });
+      console.log(await app.service('token').find());
 
-      // doesn't trigger app.login event
+      // in my actual app, token.find would return empty data but my db actually has the data
     });
   });
 });
